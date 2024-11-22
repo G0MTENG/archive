@@ -47,16 +47,9 @@ model Card {
   updatedAt DateTime @updatedAt
   title String
   content String
-  createUser User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
   userId Int
-  status Status @relation(fields: [statusId], references: [id])
   statusId Int
-}
-
-model Status {
-  id Int @id @default(autoincrement())
-  statusName String @unique
-  cards Card[]
 }
 ```
 
@@ -65,13 +58,13 @@ model Status {
 GET /
 POST /login 
 - (회원가입이 필요하지 않습니다.)
-GET /card
-POST /card
-PATCH /card
-DELETE /card
+GET /cards
+POST /cards
+PATCH /cards
+DELETE /cards/:id
 
 ### 프로젝트 세팅
 
-express + typescript setting: https://spacebike.tistory.com/57
-eslint + prettier setting: https://medium.com/@pushpendrapal_/how-to-setup-node-js-with-typescript-eslint-and-prettier-46bd968a97ac
+- express + typescript setting: https://spacebike.tistory.com/57
+- eslint + prettier setting: https://medium.com/@pushpendrapal_/how-to-setup-node-js-with-typescript-eslint-and-prettier-46bd968a97ac
 
