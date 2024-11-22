@@ -28,6 +28,38 @@ NodeJS 교과서를 읽고 간단하게 express + MySQL + React 프로젝트를 
 
 * 이후에 추가적으로 드래그앤드랍 기능을 추가할 예정인데, CRUD 기능 구현에 초점을 맞춘 프로젝트이기 때문에 추가가 안 될 수 있습니다.
 
+### ERD 설계
+
+![ERD 설계](./ERD.png)
+
+
+```prisma
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  password String
+  cards Card[]
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  content String
+  createUser User @relation(fields: [userId], references: [id])
+  userId Int
+  status Status @relation(fields: [statusId], references: [id])
+  statusId Int
+}
+
+model Status {
+  id Int @id @default(autoincrement())
+  statusName String @unique
+  cards Card[]
+}
+```
+
 ### API
 
 GET /
@@ -41,4 +73,5 @@ DELETE /card
 ### 프로젝트 세팅
 
 express + typescript setting: https://spacebike.tistory.com/57
+eslint + prettier setting: https://medium.com/@pushpendrapal_/how-to-setup-node-js-with-typescript-eslint-and-prettier-46bd968a97ac
 
