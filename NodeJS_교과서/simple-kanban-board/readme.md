@@ -50,6 +50,7 @@ model Card {
   user User @relation(fields: [userId], references: [id])
   userId Int
   statusId Int
+  color String
 }
 ```
 
